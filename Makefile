@@ -1,9 +1,15 @@
 all: build image
 
-build: bin/go-say-hello
+BUILD_TARGET = build/go-say-hello
+IMAGE_TAG    = go-say-hello
 
-bin/go-say-hello: hello.go
-	docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp golang:alpine go build -o $@ $^
+clean:
+	@rm $(BUILD_TARGET)
+
+build: $(BUILD_TARGET)
+
+$(BUILD_TARGET): hello.go
+	docker run --rm -v `pwd`:/usr/src/myapp -w /usr/src/myapp golang:alpine go build -o $@ $^
 
 image:
-	docker build -t go-say-hello .
+	docker build -t $(IMAGE_TAG) .
