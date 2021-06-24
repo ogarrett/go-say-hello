@@ -9,6 +9,7 @@ clean:
 build: $(BUILD_TARGET)
 
 $(BUILD_TARGET): hello.go
+	@[ ! -d build/ ] && mkdir build/
 	docker run --rm -v `pwd`:/usr/src/myapp -w /usr/src/myapp golang:alpine go build -o $@ $^
 
 image:
