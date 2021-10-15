@@ -2,7 +2,7 @@ FROM alpine
 
 WORKDIR /dist
 
-COPY build/go-say-hello .
+COPY obj/go-say-hello .
 
 # Export necessary port
 EXPOSE 8080
